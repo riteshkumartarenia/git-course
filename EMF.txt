@@ -1,0 +1,63 @@
+*EntitymanagerFactory is an interface which is present in javax.persistance package.
+*It is constructed for specific database to establish to the connection to the database.
+*The main role of EMF support instance of EntityManager.
+*To create a EMF object we will call createEntityManagerFactory method which is present inside Persistence class.
+*for this createEntityManagerFactory method we should pass persistence unit name.
+
+
+*Entitymanager is a interface which is present in javax.persistence package.
+*we can create EM object by calling createEntityManager method which is present inside EntityManagerFactory interface.
+*This EM interface will provide some inbuilt methods to perform basic CRUD operations like, persist(), merge(), remove(), find().
+*We can create Multiple EM instances by using same reference of EMF to perform some perticular operations on database.
+
+
+*Persistence Unit will be One for One database. But in one Persistence.xml file we can have multiple persistence unit.
+*If we want to intract with multiple database then provide the DataBase configuration in the persistence unit tag.
+Note:- persistence unit name should be unique.
+
+
+
+ET is an interface which is present inside javax.persistence package.
+* We can create ET object by calling getTransaction() method which is present inside EM interface.
+* Transaction means Set of operations which will get either succeed or it got failed as a single unit is called as Transaction.
+*ET interface will provide some inbuilt methods like begin(), commit(), rollback().
+
+
+Hibernate Caching:-
+*Hibernate provides internally a default cacheing mechanism that is 1st level cacheing.
+*Cache means a temporary memory allocation.
+
+
+*When 1st time you try to fetch a record ,
+    em.find(Student.class,101);
+
+1st it will check whether the corresponding student object is present inside 1st level cache or not.
+Since you are fetching the record for the 1st time, corresponding student object will not be there inside the 1st level cacheing hence it is going to hit/strike the database then fetch the record and give it to the user. Simultaniously while returning the corresponding student object will be saved or stored inside 1st level cacheing.
+When you 2nd time you are trying to fetch the same record, e,g em.find(Student.class,101);
+it will 1st check 1st level cacheing whether the corresponding student object is present, it will be present hence, it is going to give the records to the user from the 1st level cacheing itself.
+
+Note:-
+*1st level cacheing is one for one entitymanager.
+
+Hibernate Life Cycle:-
+*Hibernate life cycle means from starting/creation of an entity object till the end of its destruction.
+Transient State:- 
+As soon as we create an entity object and set the values for that object. it will be in a trasient state.
+In this state entity object is still not establish the connection to a perticular row in the database.
+
+Persistent State:-
+*As soon as we call a persist method the entity object will get converted from transient state to persistence state. 
+In this state the entity object has establish the connection to perticular row/ record in the database.
+
+Removed State:-
+*As soon as we call a remove method it will be in a removed state.
+
+Detached State:-
+*In order to close the connection between an entity object to a perticular row in a database we use clean()/close().
+*Once we use clean() or close(), the entity object will be in detached state.
+*Again if you call remove() or merge() method it will get converted back to persistent state.
+
+
+
+
+
